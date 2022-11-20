@@ -51,7 +51,6 @@ form .form-field:nth-child(1)::before {
   top: 15px;
 }
 form .form-field:nth-child(2)::before {
-  background-image: url(../Assets/img/lock-icon.png);
   width: 16px;
   height: 16px;
 }
@@ -101,4 +100,7 @@ form .btn {
   text-align: center;
   text-decoration: underline;
   cursor: pointer;
+}
+form #password::before{
+  background-image: url(../Assets/img/lock-icon.png);
 }

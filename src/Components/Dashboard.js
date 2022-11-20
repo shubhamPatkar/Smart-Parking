@@ -144,12 +144,11 @@ useEffect(()=>{
   <div id="demo-modal" class="modal" role="dialog" tabindex="-1" open={modelStatus}>
       <div class="model-inner">
         <div class="modal-header">
-          <h3><b>Raise a Request for index {index+1}</b></h3>
+          <h3><b>Booking for seat no {index+1}</b></h3>
           <button class="modal-close" data-id="demo-modal" aria-label="Close" onClick={()=>{setModelStatus(false)}}>
             &times;
           </button> 
         </div>
-        <p>
         <form>
         <div class="form-field" >
     <input type="text" value={vechicleNo} onChange={(event)=>{
@@ -167,7 +166,6 @@ useEffect(()=>{
     <button class="btn" type="submit" onClick={()=>{sumbitDetails()}}>Submit</button>
   </div>
   </form>
-        </p>
       </div>
     </div>
     

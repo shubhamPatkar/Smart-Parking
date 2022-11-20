@@ -35,7 +35,7 @@ function Login (){
     }} placeholder="Email / Username" required/>
   </div>
   
-  <div class="form-field" >
+  <div class="form-field" id="password">
     <input type="password" value={password} onChange={(event)=>{
       setPassword(event.target.value)
     }} placeholder="Password" required/>                         
