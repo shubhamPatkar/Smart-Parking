@@ -22,7 +22,7 @@ Default data we put in JSON file which will contain Admin credentials and parkin
 Per user data we are going to handle on localstorage.
 
 ### Credentials
- Admin- userName: shubam@gmail.com
+ Admin- userName: shubham@gmail.com
  password: shubham@123
 
  User- userName: bob@gmail.com
