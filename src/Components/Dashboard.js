@@ -6,7 +6,7 @@ import '../CSS/login.css'
 import car from '../Assets/img/car.gif'
 import parkedCar from '../Assets/img/parked_car.gif'
 import pending_car from '../Assets/img/pending_car.jpg'
-import { useNavigate,useLocation, json  } from 'react-router-dom';
+import { useNavigate,useLocation  } from 'react-router-dom';
 import Menu from './Menu';
 
 

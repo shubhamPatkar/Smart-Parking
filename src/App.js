@@ -11,7 +11,6 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<Login/>}/>
-        <Route  exact path="*" element={<PageNotFound/>}/>
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/guestLogin" element={<GuestLogin/>}/>
         <Route exact path="/logout" element={<Login/>}/>
