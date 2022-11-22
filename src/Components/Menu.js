@@ -6,7 +6,7 @@ import user from '../Assets/icons/user.png'
 import logout from '../Assets/icons/log-out.png'
 import help from '../Assets/icons/question.png'
 import envelope from '../Assets/icons/envelope.png'
-import { useNavigate,useLocation  } from 'react-router-dom';
+import { useNavigate  } from 'react-router-dom';
 
 function Menu(props){
     const navigate = useNavigate();
@@ -21,11 +21,11 @@ function Menu(props){
         
       }
     return(
-        <div class="action">
-        <div class="profile" onClick={()=>{menuToggle()}}>
+        <div className="action" role="menu">
+        <div className="profile" onClick={()=>{menuToggle()}}>
           <img src={parkedCar} />
         </div>
-        <div class="menu" style={{display:"flow-root",visibility:visible}}>
+        <div className="menu" style={{display:"flow-root",visibility:visible}}>
           <h3>{props.firstName}{" "}{props.lastName}<br /><span>{props.vechicleNo}</span>
           <br /><span>{props.userName}{" "}<b>({props.profile})</b></span></h3><br/>
           <ul>

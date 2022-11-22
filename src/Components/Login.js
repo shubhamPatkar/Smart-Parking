@@ -1,11 +1,11 @@
-import {useEffect,useState} from 'react';
+import {useState} from 'react';
 import '../CSS/login.css';
 import { useNavigate  } from 'react-router-dom';
 const loginData = require('../DataSet/login.json')
 
 
 function Login (){
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
   const [userName,setUserName]=useState("");
   const [password,setPassword]=useState("");
  
@@ -26,23 +26,23 @@ function Login (){
 
   }
   return (
-    <div id="login">
+    <div id="login" role="login">
    <div id="bg"></div>
     <form>
-  <div class="form-field" >
-    <input type="email" value={userName} onChange={(event)=>{
+  <div className="form-field" >
+    <input  type="email" name="userName" value={userName} onChange={(event)=>{
       setUserName(event.target.value)
     }} placeholder="Email / Username" required/>
   </div>
   
-  <div class="form-field" id="password">
-    <input type="password" value={password} onChange={(event)=>{
+  <div className="form-field" id="password">
+    <input  type="password" value={password} name="password" onChange={(event)=>{
       setPassword(event.target.value)
     }} placeholder="Password" required/>                         
     </div>
   
-  <div class="form-field">
-    <button class="btn" type="submit" onClick={()=>{sumbitDetails()}}>Log in</button>
+  <div className="form-field">
+    <button className="btn" type="submit" onClick={()=>{sumbitDetails()}}>Log in</button>
   </div>
   <p id="guestLogin" onClick={()=>{
    navigate("/guestLogin")

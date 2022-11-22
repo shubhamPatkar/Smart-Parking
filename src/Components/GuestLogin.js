@@ -66,33 +66,33 @@ function GuestLogin (){
     }
   }
   return (
-    <div id="login">
+    <div id="login" role="guestLogin">
    <div id="bg"></div>
     <form>
-    <div class="form-field" >
+    <div className="form-field" >
     <input type="text" value={firstName} onChange={(event)=>{
       setFirstName(event.target.value)
     }} placeholder="FirstName" required/>
   </div>
-  <div class="form-field" >
+  <div className="form-field" >
     <input type="text" value={lastName} onChange={(event)=>{
       setLastName(event.target.value)
     }} placeholder="LastName" required/>
   </div>
-  <div class="form-field" >
+  <div className="form-field" >
     <input type="number" value={mobileNo} onChange={(event)=>{
       setMobileNo(event.target.value)
     }} placeholder="Mobile No" required/>
   </div>
-  <div class="form-field" >
+  <div className="form-field" >
     <input type="Email" value={email} onChange={(event)=>{
       setEmail(event.target.value)
     }} placeholder="Email" required/>
   </div>
   
   
-  <div class="form-field">
-    <button class="btn" type="submit" onClick={()=>{sumbitDetails()}}>Log in</button>
+  <div className="form-field">
+    <button className="btn" type="submit" onClick={()=>{sumbitDetails()}}>Log in</button>
   </div>
   <p id="guestLogin" onClick={()=>{
    navigate("/login")

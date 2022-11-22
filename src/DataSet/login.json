@@ -5,7 +5,7 @@
         "password":"shubham@123",
         "firstName":"shubham",
         "lastName":"patkar",
-        "vechicleNo":"567864",
+        "vechicleNo":"12345",
         "profile":"Admin"
     },
     {
@@ -14,7 +14,7 @@
         "password":"alias@123",
         "firstName":"alias",
         "lastName":"ant",
-        "vechicleNo":"546553",
+        "vechicleNo":"545345",
         "profile":"User"
     },
     {
@@ -23,7 +23,7 @@
         "password":"foo@123",
         "firstName":"foo",
         "lastName":"faa",
-        "vechicleNo":"545466",
+        "vechicleNo":"76757",
         "profile":"User"
     },
     {
@@ -32,7 +32,7 @@
         "password":"bob@123",
         "firstName":"bob",
         "lastName":"lin",
-        "vechicleNo":"4565765",
+        "vechicleNo":"587866",
         "profile":"user"
     },
     {
@@ -41,7 +41,7 @@
         "password":"sam@123",
         "firstName":"sam",
         "lastName":"curran",
-        "vechicleNo":"435436",
+        "vechicleNo":"897678",
         "profile":"Guest"
     }
 ]

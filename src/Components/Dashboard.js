@@ -14,7 +14,7 @@ const data = require('../DataSet/dashboard.json')
 const loginData = require('../DataSet/login.json')
 
 function Dashboard (){
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
 const location = useLocation();
   const profileWithStringify = (localStorage.profileData==null||localStorage.profileData=="null")?location.state:JSON.parse(localStorage.profileData);
 
@@ -125,45 +125,45 @@ useEffect(()=>{
 
   return (
     <>
-   <section class="top-nav">
+   <section className="top-nav" role="dashboard">
     <div>
     <b>{location.state==null?profileWithStringify.firstName:location.state.firstName}{" "}{location.state==null?profileWithStringify.lastName:location.state.lastName}<br />
     {location.state==null?profileWithStringify.vechicleNo:location.state.vechicleNo}</b>
     </div>
     <input id="menu-toggle" type="checkbox" />
-    <label class='menu-button-container' for="menu-toggle">
-    <div class='menu-button'></div>
+    <label className='menu-button-container' for="menu-toggle">
+    <div className='menu-button'></div>
   </label>
-    <ul class="menu" style={{cursor: "pointer"}}>
+    <ul className="menu" style={{cursor: "pointer"}}>
       
       <li><Menu  firstName={location.state==null?profileWithStringify.firstName:location.state.firstName} lastName={location.state==null?profileWithStringify.lastName:location.state.lastName} vechicleNo={location.state==null?profileWithStringify.vechicleNo:location.state.vechicleNo} userName={location.state==null?profileWithStringify.userName:location.state.userName} profile={profile} /></li>
       
     </ul>
   </section>
-  <div class="cards-list">
-  <div id="demo-modal" class="modal" role="dialog" tabindex="-1" open={modelStatus}>
-      <div class="model-inner">
-        <div class="modal-header">
+  <div className="cards-list">
+  <div id="demo-modal" className="modal" role="dialog" tabindex="-1" open={modelStatus}>
+      <div className="model-inner">
+        <div className="modal-header">
           <h3><b>Booking for seat no {index+1}</b></h3>
-          <button class="modal-close" data-id="demo-modal" aria-label="Close" onClick={()=>{setModelStatus(false)}}>
+          <button className="modal-close" data-id="demo-modal" aria-label="Close" onClick={()=>{setModelStatus(false)}}>
             &times;
           </button> 
         </div>
         <form>
-        <div class="form-field" >
+        <div className="form-field" >
     <input type="text" value={vechicleNo} onChange={(event)=>{
       setVechicleNo(event.target.value)
     }} placeholder="Vechicle No" required/>
   </div>
   
-  <div class="form-field" >
+  <div className="form-field" >
     <input type="date" value={date} onChange={(event)=>{
       setDate(event.target.value)
     }} placeholder="Date" required/>                         
     </div>
   
-  <div class="form-field">
-    <button class="btn" type="submit" onClick={()=>{sumbitDetails()}}>Submit</button>
+  <div className="form-field">
+    <button className="btn" type="submit" onClick={()=>{sumbitDetails()}}>Submit</button>
   </div>
   </form>
       </div>
@@ -173,7 +173,7 @@ useEffect(()=>{
 
     {datawithLocal.map((key,index)=>{
         return(
-         <div class="card 4" onClick={()=>{
+         <div className="card 4" onClick={()=>{
             if(key.status==="Approved"&&profile==="Admin")
             {
               let x = window.confirm("Alerady Alloted by user "+key.firstName+" "+key.lastName+" for parking on "+key.date+". Do you want to remove?");
@@ -195,10 +195,10 @@ useEffect(()=>{
             setIndex(index);
             }
          }}>
-         <div class="card_image">
+         <div className="card_image">
          <img src={key.status==="Approved"?parkedCar:(key.status==="Raised"?pending_car:car)} alt="logo" />
            </div>
-         <div class="card_title title-white">
+         <div className="card_title title-white">
            <p style={{color:key.status==="Approved"?"white":(key.status==="Raised"?"darkblue":"red")}}>{key.status==="Approved"?"Parked":(key.status==="Raised"?"Pending":"open")} {index+1}</p>
          </div>
        </div>

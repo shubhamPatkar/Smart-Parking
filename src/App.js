@@ -1,9 +1,7 @@
-import logo from './logo.svg';
 import {Route,Link,Routes,BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
 import Login from './Components/Login'
 import GuestLogin from './Components/GuestLogin';
-import PageNotFound from './Components/PageNotFound';
 
 import Dashboard from './Components/Dashboard'
 function App() {
