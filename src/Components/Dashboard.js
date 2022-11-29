@@ -6,204 +6,222 @@ import '../CSS/login.css'
 import car from '../Assets/img/car.gif'
 import parkedCar from '../Assets/img/parked_car.gif'
 import pending_car from '../Assets/img/pending_car.jpg'
-import { useNavigate,useLocation  } from 'react-router-dom';
+import { useLocation  } from 'react-router-dom';
 import Menu from './Menu';
+import axios from 'axios';
 
-
-const data = require('../DataSet/dashboard.json')
-const loginData = require('../DataSet/login.json')
 
 function Dashboard (){
-  const navigate = useNavigate();
-const location = useLocation();
-  const profileWithStringify = (localStorage.profileData==null||localStorage.profileData=="null")?location.state:JSON.parse(localStorage.profileData);
+  const location = useLocation();
 
 const [modelStatus,setModelStatus] = useState(false);
-const [index,setIndex] = useState(false);
-const [vechicleNo,setVechicleNo] = useState(location.state==null?profileWithStringify.vechicleNo:location.state.vechicleNo);
+const [modelStatusForAdmin,setModelStatusForAdmin] = useState(false);
+const [index,setIndex] = useState(0);
+const [vehicleNo,setvehicleNo] = useState(location.state?.loginData?.vehicleNo);
 const [date,setDate] = useState("");
-const [profile,setProfile] = useState(location.state==null?(profileWithStringify.profile):location.state.profile);
-const [modelStatusforProfile,setModelStatusforProfile] = useState(false);
-const [datawithLocal,setDatawithLocal] = useState([]);
+const [profile,setProfile] = useState(location.state?.loginData?.profile);
+const [data,setData] = useState([]);
+const [firstName,setFirstName]=useState(location.state?.loginData?.firstName);
+const [lastName,setLastName]=useState(location.state?.loginData?.lastName);
+const [userName,setUserName]=useState(location.state?.loginData?.userName);
+const [bearerToken,setBearerToken] = useState(location.state?.token);
+const [loginId,setLoginId] = useState(location.state?.loginData?._id);
+const [parkingId,setParkingId] = useState("");
+const [message,setMessage] =useState("");
 
+{/* After rendering calling getdetails for parking */}
 useEffect(()=>{
-    if(profile==null||profile=="")
-    {
-        alert("Something wend wrong!");
-        navigate("/");
-    }else if(localStorage.getItem("parkData")==null){
-      let parkDataforlocal = JSON.stringify(data);
-      localStorage.setItem("parkData",parkDataforlocal);
-      let profileData = JSON.stringify(location.state)
-      if(profileData!="null")
-      {
-        localStorage.setItem("profileData",profileData);
+  getDetails();
+},[]);
+
+{/* get all set parking details */}
+  const getDetails = ()=>{
+    const config = {
+      method: 'get',
+      url: 'parking/getParkingDetails',
+      headers: { 
+        'Authorization': 'Bearer '+bearerToken
       }
-
-      setDatawithLocal(data);
-    }else{
-      let profileData = JSON.stringify(location.state)
-      if(profileData!="null")
-      {
-        localStorage.setItem("profileData",profileData);
-      }
-      
-      setDatawithLocal(JSON.parse(localStorage.parkData));
-      
-    }
-},[])
-
-  const calltoAlloworReject = (status,indexValue)=>{
-    if(status)
-    {
-      datawithLocal[indexValue].status="Approved"
-      let parkDataforlocal = JSON.stringify(datawithLocal);
-      localStorage.setItem("parkData",parkDataforlocal);
-      window.location.reload();
-    }else{
-      datawithLocal[indexValue].status="open"
-      let parkDataforlocal = JSON.stringify(datawithLocal);
-      localStorage.setItem("parkData",parkDataforlocal);
-      window.location.reload();
-
-    }
-  }
-
-  const calltoApprovedEmpty = (status,indexValue)=>{
-    if(status)
-    {
-      datawithLocal[indexValue].status="open"
-      let parkDataforlocal = JSON.stringify(datawithLocal);
-      localStorage.setItem("parkData",parkDataforlocal);
-      window.location.reload();
-    }
-  }
-
-    const sumbitDetails = ()=>{
-        if(profile!=""&&(profile=="Admin"||profile.toLowerCase()=="user"))
+    };
+      axios(config) 
+      .then(function (response) {
+        if(response.status===200)
         {
-            let objData={};
-            for(var i=0;i<loginData.length;i++)
-            {
-                if(loginData[i].loginId==location.state.loginId)
-                {
-                    objData=loginData[i];
-                    break;
-                }
-            }
-            if(objData.userName)
-            {
-              var temp = JSON.parse(localStorage.parkData);
-              temp[index].loginId =objData.loginId 
-              temp[index].userName = objData.userName
-              temp[index].firstName = objData.firstName
-              temp[index].lastName = objData.lastName
-              temp[index].vechicleNo = vechicleNo
-              temp[index].seatNo = index
-              temp[index].date = date
-              temp[index].status = "Approved"
-              let tempwithStringify = JSON.stringify(temp)
-              localStorage.setItem("parkData",tempwithStringify)
-                alert("Space Alloted");
-            }
-        }else{
-         
-          var temp = JSON.parse(localStorage.parkData);
-          temp[index].loginId =location.state.loginId 
-          temp[index].userName = location.state.userName
-          temp[index].firstName = location.state.firstName
-          temp[index].lastName = location.state.lastName
-          temp[index].vechicleNo = vechicleNo
-          temp[index].seatNo = index
-          temp[index].date = date
-          temp[index].status = "Raised"
-          let tempwithStringify = JSON.stringify(temp)
-          localStorage.setItem("parkData",tempwithStringify)
-            alert("request raised");
+          setData(response.data.parkingData)
         }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+  {/* action on each card by user, guest and admin */}
+  const modalClick=(index)=>{
+    setParkingId(data[index]._id);
+    setIndex(index);
+   
+    if(data[index].status!="open"&&profile==="Admin")
+    {
+      const config = {
+        method: 'get',
+        url: 'login/getLoginDetailsbyId/'+data[index].loginId,
+        headers: { 
+          'Authorization': 'Bearer '+bearerToken
+        }
+      };
+        axios(config) 
+        .then(function (response) {
+          if(response.status===200)
+          {
+            const temp = response.data.loginData
+            setParkingId(data[index]._id);
+            setLoginId(temp._id);
+            if(data[index].status==="Pending")
+            {
+              setMessage(temp.firstName+" "+temp.lastName+ " is a "+temp.profile+" of vehicle number "+temp.vehicleNo
+            +" raised request on "+data[index].date+" Do u want to accept the  request?")
+            }else{
+              setMessage(temp.firstName+" "+temp.lastName+ " is a "+temp.profile+" of vehicle number "+temp.vehicleNo
+            +" allot space on "+data[index].date+" Do u want to remove from parking?");
+            }
+            setModelStatusForAdmin(true);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      
+    }else if(data[index].status==="open"){
+      const config = {
+        method: 'get',
+        url: 'login/getLoginDetailsbyId/'+location.state.loginData?._id ,
+        headers: { 
+          'Authorization': 'Bearer '+bearerToken
+        }
+      };
+      axios(config) 
+      .then(function (response) {
+        if(response.status===200)
+        {
+          const temp = response.data.loginData
+          setParkingId(data[index]._id);
+          setLoginId(temp._id);
+         setModelStatus(true);
+        }
+      })
+    }
+  }
+
+  {/* Raising request by user guest and login for parking */}
+    const submitDetails = ()=>{
+
+        const obj={
+        "_id":parkingId,
+        "loginId":loginId,
+        "date":data[index].date,
+        "seatNo":index+1,
+        "status":profile==="Admin"||profile==="User"?(data[index].status==="Approved"?"open":"Approved"):"Pending"
+        }
+    const config = {
+      method: 'put',
+      url: 'parking/updateParkingDetails',
+      headers: { 
+        'Authorization': 'Bearer '+bearerToken
+      },
+      data:obj
+    };
+
+    axios(config)
+    .then(function (response) {
+      setModelStatusForAdmin(false);
+      setModelStatus(false);
+      alert(response.data.message);
+      getDetails();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
    }
+
+  
+  
 
   return (
     <>
    <section className="top-nav" role="dashboard">
     <div>
-    <b>{location.state==null?profileWithStringify.firstName:location.state.firstName}{" "}{location.state==null?profileWithStringify.lastName:location.state.lastName}<br />
-    {location.state==null?profileWithStringify.vechicleNo:location.state.vechicleNo}</b>
+    <b>{firstName}{" "}{lastName}</b><br/>
+    <b>{vehicleNo}</b>
     </div>
-    <input id="menu-toggle" type="checkbox" />
-    <label className='menu-button-container' for="menu-toggle">
-    <div className='menu-button'></div>
-  </label>
     <ul className="menu" style={{cursor: "pointer"}}>
-      
-      <li><Menu  firstName={location.state==null?profileWithStringify.firstName:location.state.firstName} lastName={location.state==null?profileWithStringify.lastName:location.state.lastName} vechicleNo={location.state==null?profileWithStringify.vechicleNo:location.state.vechicleNo} userName={location.state==null?profileWithStringify.userName:location.state.userName} profile={profile} /></li>
-      
+      <li><Menu  firstName={firstName} lastName={lastName} vehicleNo={vehicleNo} userName={userName} profile={profile} /></li>
     </ul>
   </section>
-  <div className="cards-list">
-  <div id="demo-modal" className="modal" role="dialog" tabindex="-1" open={modelStatus}>
-      <div className="model-inner">
-        <div className="modal-header">
-          <h3><b>Booking for seat no {index+1}</b></h3>
-          <button className="modal-close" data-id="demo-modal" aria-label="Close" onClick={()=>{setModelStatus(false)}}>
-            &times;
-          </button> 
-        </div>
-        <form>
-        <div className="form-field" >
-    <input type="text" value={vechicleNo} onChange={(event)=>{
-      setVechicleNo(event.target.value)
-    }} placeholder="Vechicle No" required/>
-  </div>
-  
-  <div className="form-field" >
-    <input type="date" value={date} onChange={(event)=>{
-      setDate(event.target.value)
-    }} placeholder="Date" required/>                         
-    </div>
-  
-  <div className="form-field">
-    <button className="btn" type="submit" onClick={()=>{sumbitDetails()}}>Submit</button>
-  </div>
-  </form>
-      </div>
-    </div>
-    
-    
 
-    {datawithLocal.map((key,index)=>{
-        return(
-         <div className="card 4" onClick={()=>{
-            if(key.status==="Approved"&&profile==="Admin")
-            {
-              let x = window.confirm("Alerady Alloted by user "+key.firstName+" "+key.lastName+" for parking on "+key.date+". Do you want to remove?");
-              calltoApprovedEmpty(x,index)
-            }  
-          else if(key.status==="Approved")
-            {
-                alert("Alerady Alloted by user "+key.firstName+" "+key.lastName);
-            }else if(key.status==="Raised"&&profile==="Admin"){
-              let x = window.confirm("Allow guest "+key.firstName+" "+key.lastName+" to car parking for "+key.date+" ?");
-              calltoAlloworReject(x,index)
-            }else if(key.status==="Raised")
-            {
-              alert("Request raisd by guest "+key.firstName+" "+key.lastName)
-            
-            } 
-            else{
-            setModelStatus(true);
-            setIndex(index);
-            }
-         }}>
-         <div className="card_image">
-         <img src={key.status==="Approved"?parkedCar:(key.status==="Raised"?pending_car:car)} alt="logo" />
-           </div>
-         <div className="card_title title-white">
-           <p style={{color:key.status==="Approved"?"white":(key.status==="Raised"?"darkblue":"red")}}>{key.status==="Approved"?"Parked":(key.status==="Raised"?"Pending":"open")} {index+1}</p>
-         </div>
-       </div>
-        )
-    })}
+  <div className="cards-list">
+        {/*Modal box for raising request */}
+      <div id="demo-modal" className="modal" role="dialog" tabindex="-1" open={modelStatus}>
+          <div className="model-inner">
+            <div className="modal-header">
+              <h3><b>Booking for seat no {index+1}</b></h3>
+              <button className="modal-close" data-id="demo-modal" aria-label="Close" onClick={()=>{setModelStatus(false)}}>
+                &times;
+              </button> 
+            </div>
+            <form>
+              <div className="form-field" >
+                <input type="text" value={vehicleNo} onChange={(event)=>{
+                  setvehicleNo(event.target.value)
+                }} placeholder="Vechicle No" required/>
+              </div>
+      
+              <div className="form-field" >
+                <input type="date" value={date} onChange={(event)=>{
+                  setDate(event.target.value)
+                }} placeholder="Date" required/>                         
+              </div>
+                
+              <div className="form-field">
+              <button className="btn" type="button" onClick={()=>{submitDetails()}}>Submit</button>
+              </div>                          
+            </form>
+          </div>
+      </div>
+
+        {/*Modal box for admin actions */}
+        <div id="demo-modal" className="modal" role="dialog" tabindex="-1" open={modelStatusForAdmin}>
+          <div className="model-inner">
+            <div className="modal-header">
+              <h3><b>Booking for seat no {index+1}</b></h3>
+              <button className="modal-close" data-id="demo-modal" aria-label="Close" onClick={()=>{setModelStatusForAdmin(false)}}>
+                &times;
+              </button> 
+            </div>
+            <form>
+              <b>{message}</b>
+                
+              <div className="form-field">
+              <button className="btn"  type="button" onClick={()=>{submitDetails()}}>Confirm</button>
+              <button className="btn" style={{backgroundColor:"red"}} type="button" onClick={()=>{setModelStatusForAdmin(false)}}>Cancel</button>
+
+              </div>                          
+            </form>
+          </div>
+      </div>
+        
+      {/*Rendering all the parking slots */}
+        {data.map((key,index)=>{
+            return(
+            <div className="card 4" onClick={()=>{modalClick(index)}}>
+            <div className="card_image">
+            <img src={key.status==="Approved"?parkedCar:(key.status==="Pending"?pending_car:car)} alt="logo" />
+              </div>
+            <div className="card_title" >
+              <p className={key.status}>{key.status} {index+1}</p>
+            </div>
+          </div>
+            )
+        })}
    
   </div>
 </>

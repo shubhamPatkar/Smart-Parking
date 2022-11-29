@@ -1,47 +1,47 @@
 [
     {
-        "loginId":1,
+        
         "userName":"shubham@gmail.com",
         "password":"shubham@123",
         "firstName":"shubham",
         "lastName":"patkar",
-        "vechicleNo":"12345",
+        "vehicleNo":"12345",
         "profile":"Admin"
     },
     {
-        "loginId":2,
+       
         "userName":"alias@gmail.com",
         "password":"alias@123",
         "firstName":"alias",
         "lastName":"ant",
-        "vechicleNo":"545345",
+        "vehicleNo":"545345",
         "profile":"User"
     },
     {
-        "loginId":3,
+        
         "userName":"foo@gmail.com",
         "password":"foo@123",
         "firstName":"foo",
         "lastName":"faa",
-        "vechicleNo":"76757",
+        "vehicleNo":"76757",
         "profile":"User"
     },
     {
-        "loginId":4,
+        
         "userName":"bob@gmail.com",
         "password":"bob@123",
         "firstName":"bob",
         "lastName":"lin",
-        "vechicleNo":"587866",
+        "vehicleNo":"587866",
         "profile":"user"
     },
     {
-        "loginId":5,
+        
         "userName":"sam@gmail.com",
         "password":"sam@123",
         "firstName":"sam",
         "lastName":"curran",
-        "vechicleNo":"897678",
+        "vehicleNo":"897678",
         "profile":"Guest"
     }
 ]

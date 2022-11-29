@@ -1,30 +1,25 @@
 import {useState} from 'react';
 import '../CSS/login.css';
 import { useNavigate  } from 'react-router-dom';
-const loginData = require('../DataSet/login.json')
-
+import axios from 'axios';
 
 function Login (){
   const navigate = useNavigate();
   const [userName,setUserName]=useState("");
   const [password,setPassword]=useState("");
  
-
-
-  const sumbitDetails = ()=>{
-   for(var i=0;i<loginData.length;i++)
-   {
-    if(loginData[i].userName==userName&&loginData[i].password==password)
-    {
-      navigate("/dashboard",{state:loginData[i]});
-      break;
-    }else if(i===loginData.length-1&&(loginData[i].userName!=userName&&loginData[i].password!=password))
-    {
-      alert("please enter correct credentials");
-    }
-   }
-
+  const sumbitDetails = async()=>{
+    axios.get("/login/getLoginDetails/"+userName+"/"+password)
+    .then(function (response) {
+      response.data.token
+      ?navigate("/dashboard",{state:response.data})
+      :alert(response.data.message)
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
+
   return (
     <div id="login" role="login">
    <div id="bg"></div>
@@ -42,7 +37,7 @@ function Login (){
     </div>
   
   <div className="form-field">
-    <button className="btn" type="submit" onClick={()=>{sumbitDetails()}}>Log in</button>
+    <button className="btn" type='button' onClick={()=>{sumbitDetails()}}>Log in</button>
   </div>
   <p id="guestLogin" onClick={()=>{
    navigate("/guestLogin")

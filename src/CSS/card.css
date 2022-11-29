@@ -55,7 +55,15 @@
   .title-black {
     color: black;
   }
-  
+  .card .card_title .open{
+    color: red;
+  }
+  .card .card_title .Pending{
+    color: rgb(55, 0, 255);
+  }
+  .card .card_title .Approved{
+    color: white;
+  }
   @media all and (max-width: 500px) {
     .card-list {
       /* On small screens, we are no longer using row direction but column */

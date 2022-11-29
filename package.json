@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^13.5.0",
     "@zarconontol/enzyme-adapter-react-18": "^0.7.3",
+    "axios": "^1.2.0",
     "fs": "^0.0.1-security",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -18,7 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "coverage":"jest --coverage --watchAll",
+    "coverage": "jest --coverage --watchAll",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -47,5 +48,6 @@
     "enzyme": "^3.11.0",
     "jest": "^27.5.1",
     "react-test-renderer": "^18.2.0"
-  }
+  },
+  "proxy": "http://localhost:3000/"
 }

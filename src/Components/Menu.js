@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import '../CSS/menu.css'
 import parkedCar from '../Assets/avatar.jpeg'
-import user from '../Assets/icons/user.png'
 import logout from '../Assets/icons/log-out.png'
 import help from '../Assets/icons/question.png'
 import envelope from '../Assets/icons/envelope.png'
@@ -18,7 +17,6 @@ function Menu(props){
         }else{
             setVisible("visible")
         }
-        
       }
     return(
         <div className="action" role="menu">
