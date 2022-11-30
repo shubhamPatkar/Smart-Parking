@@ -118,13 +118,13 @@ function Dashboard (){
 
   {/* Raising request by user guest and login for parking */}
   const submitDetails = ()=>{
-
+    const profileForStatus = profile==="Admin"||profile==="User"?(data[index].status==="Approved"?"open":"Approved"):"Pending"
     const obj={
       "_id":parkingId,
       "loginId":loginId,
-      "date":data[index].date,
+      "date":profileForStatus==="open"?"":(data[index].date==""?date:data[index].date),
       "seatNo":index+1,
-      "status":profile==="Admin"||profile==="User"?(data[index].status==="Approved"?"open":"Approved"):"Pending"
+      "status":profileForStatus
     }
     const config = {
       method: "put",
