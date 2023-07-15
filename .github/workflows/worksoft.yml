@@ -1,24 +1,27 @@
-name: Environment Variable Example
+name: Play with environment variables
 
-on: [push]
+env:
+  TEST_RESULT: 'success'
+  
+on:[push]
 
 jobs:
-  job1:
-    runs-on: ubuntu-latest
+ job-1:
+   name: Change env variable
+   runs-on: ubuntu-latest
+  steps:
+    - name: Print env variable
+      run: echo 'TEST_RESULT is' $TEST_RESULT
+    - name: Set env variable
+      run: echo "::set-env name=TEST_RESULT::failure"
+    - name: Print env variable
+      run: echo 'TEST_RESULT is' $TEST_RESULT
 
-    steps:
-      - name: Set global variable
-        run: echo "GLOBAL_VARIABLE=initial_value" >> $GITHUB_ENV
 
-      - name: Modify global variable
-        run: |
-          echo "GLOBAL_VARIABLE=new_value" >> $GITHUB_ENV
-          echo ${{ env.GLOBAL_VARIABLE }}
-
-  job2:
-    needs: job1
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Use global variable
-        run: echo ${{ env.GLOBAL_VARIABLE }}
+job-2:
+  name: Access modified env variable
+  runs-on: ubuntu-latest
+  needs: job-1
+  steps:
+   - name: Print env variable
+     run: echo 'TEST_RESULT is' $TEST_RESULT
