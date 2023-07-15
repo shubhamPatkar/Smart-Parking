@@ -43,4 +43,4 @@ job2:
     run: echo "::set-env name=TEST_RESULT::${{ needs.job1.outputs.test-result }}"
 
   - name: Print new value of env variable
-     un: echo "TEST_RESULT = $TEST_RESULT
+    run: echo "TEST_RESULT = $TEST_RESULT
