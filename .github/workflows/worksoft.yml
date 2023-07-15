@@ -1,0 +1,29 @@
+name: Set Environment Variable on Job Trigger
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  set_env_variable:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set Environment Variable
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "PR environment variable"
+            echo "PR_VARIABLE=PR_VALUE" >> $GITHUB_ENV
+          elif [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "Push environment variable"
+            echo "PUSH_VARIABLE=PUSH_VALUE" >> $GITHUB_ENV
+          fi
+
+      - name: Check Environment Variable
+        run: |
+          echo $PR_VARIABLE
+          echo $PUSH_VARIABLE
