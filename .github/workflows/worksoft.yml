@@ -4,7 +4,7 @@ on:
     branches:
       - main
 env:
-  MY_VARIABLE: ''
+  MY_VARIABLE: 'shubham'
 
 jobs:
   myJob:
