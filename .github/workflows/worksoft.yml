@@ -1,9 +1,12 @@
 name: Play with environment variables
-
+on: 
+  push:
+    branches:
+    - main
 env:
   TEST_RESULT: 'success'
   
-on:[push]
+
 
 jobs:
  job-1:
