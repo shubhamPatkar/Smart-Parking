@@ -24,3 +24,10 @@ jobs:
       - name: Access environment variable in another job
         run: |
           echo "Value of MY_VARIABLE in another job: $MY_VARIABLE"
+          
+  secondJob:
+     runs-on: ubuntu-latest
+     steps:
+      - name: check variable
+        run: |
+          echo "Value of MY_VARIABLE in another job: $MY_VARIABLE"
