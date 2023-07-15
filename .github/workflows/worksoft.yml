@@ -11,7 +11,9 @@ jobs:
         run: echo "GLOBAL_VARIABLE=initial_value" >> $GITHUB_ENV
 
       - name: Modify global variable
-        run: echo "GLOBAL_VARIABLE=new_value" >> $GITHUB_ENV
+        run: |
+          echo "GLOBAL_VARIABLE=new_value" >> $GITHUB_ENV
+          echo ${{ env.GLOBAL_VARIABLE }}
 
   job2:
     needs: job1
