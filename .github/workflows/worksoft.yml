@@ -27,4 +27,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Display global environment variable
-        run: echo "Global Variable: ${{ env.MY_VARIABLE }}"
+        run:  echo ${{env.MY_VARIABLE}}
