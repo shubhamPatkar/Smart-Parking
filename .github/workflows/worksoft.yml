@@ -1,46 +1,30 @@
-name: job1
-on: [push]
+name: My Workflow
+
+on:
+  push:
+    branches:
+      - main
+
 env:
-  TEST_RESULT: 'success'
+  MY_VARIABLE: "Hello, World!"
+
 jobs:
-job1:
- name: Change env variable
+  job1:
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-# set job-level output and pass the value of step-level output to it
-outputs:
-  test-result: ${{ steps.set_outputs.outputs.test-result }}
+      - name: Display global environment variable
+        run: echo "::set-env name=MY_VARIABLE::failure"
 
-runs-on: ubuntu-latest
-steps:
-  - name: Print value of env variable
-    run: echo "TEST_RESULT = $TEST_RESULT"
+  job2:
+    runs-on: ubuntu-latest
 
-  - name: Change env variable
-    run: echo "::set-env name=TEST_RESULT::failure"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-  - name: Print new value of env variable
-    run: echo "TEST_RESULT = $TEST_RESULT"
-
-  # set step-level output and pass the value of env variable to it
-  - name: set outputs
-    id: set_outputs
-    run: |
-      echo "::set-output name=test-result::$TEST_RESULT"
-
-job2:
-  name: Access modified env variable
-  needs: [job1]
-  runs-on: ubuntu-latest
-  steps:
-  - name: Print the output of job1
-    run: echo "needs.job1.outputs.test-result = ${{ needs.job1.outputs.test-result }}"
- 
-  - name: Print value of env variable
-    run: echo "TEST_RESULT = $TEST_RESULT"
-
-  - name: Change env variable
-    run: echo "::set-env name=TEST_RESULT::${{ needs.job1.outputs.test-result }}"
-
-  - name: Print new value of env variable
-    run: echo "TEST_RESULT = $TEST_RESULT
+      - name: Display global environment variable
+        run: echo "Global Variable: ${{ env.MY_VARIABLE }}"
