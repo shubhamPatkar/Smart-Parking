@@ -30,4 +30,4 @@ jobs:
      steps:
       - name: check variable
         run: |
-          echo "Value of MY_VARIABLE in another job: $env.MY_VARIABLE"
+          echo "Value of MY_VARIABLE in another job: ${{env.MY_VARIABLE}}"
