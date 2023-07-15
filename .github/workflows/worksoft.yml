@@ -26,6 +26,7 @@ jobs:
           echo "Value of MY_VARIABLE in another job: $MY_VARIABLE"
           
   secondJob:
+     needs: myJob
      runs-on: ubuntu-latest
      steps:
       - name: check variable
