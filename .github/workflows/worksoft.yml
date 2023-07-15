@@ -1,4 +1,4 @@
-name: Set Environment Variable on Job Trigger
+name: Multiple Jobs with Environment Variables
 
 on:
   push:
@@ -9,21 +9,20 @@ on:
       - main
 
 jobs:
-  set_env_variable:
+  job1:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Set Environment Variable
-        run: |
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            echo "PR environment variable"
-            echo "PR_VARIABLE=PR_VALUE" >> $GITHUB_ENV
-          elif [[ "${{ github.event_name }}" == "push" ]]; then
-            echo "Push environment variable"
-            echo "PUSH_VARIABLE=PUSH_VALUE" >> $GITHUB_ENV
-          fi
+      - name: Set environment variable for Job 1
+        run: echo "ENV_VAR_JOB1=value1" >> $GITHUB_ENV
 
-      - name: Check Environment Variable
-        run: |
-          echo $PR_VARIABLE
-          echo $PUSH_VARIABLE
+      - name: Display environment variable for Job 1
+        run: echo $ENV_VAR_JOB1
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set environment variable for Job 2
+        run: echo "ENV_VAR_JOB2=value2" >> $GITHUB_ENV
+
+      - name: Display environment variable for Job 2
+        run: echo $ENV_VAR_JOB1
