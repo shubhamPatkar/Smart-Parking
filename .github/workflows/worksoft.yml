@@ -1,28 +1,29 @@
-name: Multiple Jobs with Environment Variables
+name: Global Environment Variable
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push]
 
 jobs:
   job1:
     runs-on: ubuntu-latest
-    steps:
-      - name: Set environment variable for Job 1
-        run: echo "ENV_VAR_JOB1=value1" >> $GITHUB_ENV
 
-      - name: Display environment variable for Job 1
-        run: echo $ENV_VAR_JOB1
+    steps:
+      - name: Set global environment variable
+        run: echo "GLOBAL_VARIABLE=initial_value" >> $GITHUB_ENV
 
   job2:
     runs-on: ubuntu-latest
-    steps:
-      - name: Set environment variable for Job 2
-        run: echo "ENV_VAR_JOB2=value2" >> $GITHUB_ENV
 
-      - name: Display environment variable for Job 2
-        run: echo $ENV_VAR_JOB1
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Update environment variable
+        run: echo "GLOBAL_VARIABLE=new_value" >> $GITHUB_ENV
+
+  job3:
+    needs: [job2]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Use environment variable in job3
+        run: echo ${{ env.GLOBAL_VARIABLE }}
