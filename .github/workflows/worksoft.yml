@@ -1,34 +1,22 @@
-name: My Workflow
-on:
-  push:
-    branches:
-      - main
-env:
-  MY_VARIABLE: 'shubham'
+name: Environment Variable Example
+
+on: [push]
 
 jobs:
-  myJob:
+  job1:
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: Set variable value based on condition
-        run: |
-          if [ "${{ github.event_name }}" == "push" ]; then
-            echo "Setting variable value for push event"
-            echo "MY_VARIABLE=value_for_push" >> $GITHUB_ENV
-          else
-            echo "Setting variable value for other events"
-            echo "MY_VARIABLE=value_for_other" >> $GITHUB_ENV
-          fi
 
-      - name: Access environment variable in another job
-        run: |
-          echo "Value of MY_VARIABLE in another job: $MY_VARIABLE"
-          
-  secondJob:
-     needs: myJob
-     runs-on: ubuntu-latest
-     steps:
-      - name: check variable
-        run: |
-          echo "Value of MY_VARIABLE in another job: ${{env.MY_VARIABLE}}"
+    steps:
+      - name: Set global variable
+        run: echo "GLOBAL_VARIABLE=initial_value" >> $GITHUB_ENV
+
+      - name: Modify global variable
+        run: echo "GLOBAL_VARIABLE=new_value" >> $GITHUB_ENV
+
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Use global variable
+        run: echo ${{ env.GLOBAL_VARIABLE }}
