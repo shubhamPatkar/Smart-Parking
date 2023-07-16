@@ -16,6 +16,8 @@ jobs:
       output1: ${{ steps.step1.outputs.test }}
       output2: ${{ steps.step2.outputs.test }}
     steps:
+      - name: "Env variable"
+        run: echo "Env variable is ${{env.MY_VARIABLE}}"
       - id: step1
         run: echo "test=hello" >> "$GITHUB_OUTPUT"
       - id: step2
