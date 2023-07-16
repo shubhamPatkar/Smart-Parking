@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  MY_VARIABLE: "Hello, World!"
+  MY_VARIABLE: "SHubham!"
 
 jobs:
   job1:
