@@ -14,3 +14,4 @@ jobs:
   
       - name: Call job2
         uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
+       
