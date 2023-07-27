@@ -1,4 +1,4 @@
-name: My Workflow2
+name: job 2
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
 
 jobs:
   job3:
-    needs: jobs.job1
+    needs: job1.job1
     runs-on: ubuntu-latest
     steps:
       - name: Step1
-        run: echo "hello" 
+        run: echo "hello from 2nd job" 
