@@ -1,4 +1,4 @@
-name: Job 1
+name: job 1
 
 on:
   push:
