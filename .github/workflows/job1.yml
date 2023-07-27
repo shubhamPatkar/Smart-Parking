@@ -11,3 +11,5 @@ jobs:
     steps:
       - name: Step1
         run: echo "hello from job1"  
+      - name: Call job2
+        uses: ./.github/workflows/job2.yml
