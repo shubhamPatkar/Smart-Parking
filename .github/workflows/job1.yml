@@ -7,11 +7,13 @@ on:
 
 jobs:
   job1:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Step1
-        run: echo "hello from job1" 
+    uses: shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
+    with:
+      jdk_version: 11
+#     steps:
+#       - name: Step1
+#         run: echo "hello from job1" 
   
-      - name: Call job2
-        uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
+#       - name: Call job2
+#         uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
        
