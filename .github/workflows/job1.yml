@@ -12,6 +12,6 @@ jobs:
       - name: Step1
         run: echo "hello from job1 " 
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Call job2
         uses: ./.github/workflows/job2.yml
