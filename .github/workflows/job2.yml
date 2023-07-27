@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  job3:
+  job2:
     needs: job1.job1
     runs-on: ubuntu-latest
     steps:
