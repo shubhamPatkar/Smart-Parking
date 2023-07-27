@@ -7,7 +7,6 @@ on:
 
 jobs:
   job2:
-    needs: job1.job1
     runs-on: ubuntu-latest
     steps:
       - name: Step1
