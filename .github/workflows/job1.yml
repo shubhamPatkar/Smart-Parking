@@ -13,4 +13,4 @@ jobs:
         run: echo "hello from job1 " 
   
       - name: Call job2
-        uses:  Smart-Parking/.github/workflows/job2.yml@main
+        uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
