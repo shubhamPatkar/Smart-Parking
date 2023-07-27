@@ -1,9 +1,10 @@
 name: job 2
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+    secrets:
+      SOME_SECRET:
+        required: false
 
 jobs:
   job2:
