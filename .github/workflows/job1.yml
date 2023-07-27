@@ -13,6 +13,7 @@ jobs:
         run: echo "Hello from job1"
        
   job1:
+    needs: job2
     uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
 #     runs-on: [ubuntu-latest]
 #     steps:
