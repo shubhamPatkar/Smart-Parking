@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step1
-        run: echo "hello"  
+        run: echo "hello from job1"  
