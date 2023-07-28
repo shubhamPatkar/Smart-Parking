@@ -11,18 +11,27 @@ on:
         options:
          - qual
          - cert
-
+env:
+    ARN_NAME: 'AWS_CERT_ENV'
 jobs:
-  job2:
+  job1:
     runs-on: [ubuntu-latest]
     steps:
       - name: step1
-        run: echo "Hello from job1"
+        run: echo "Hello from job1 ${{env.ARN_NAME}}"
        
-  job1:
-    needs: job2
+  job2:
+    needs: job1
     if: ${{ github.event.inputs.environment == 'cert'}}
     uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
+    
+  job3:
+    needs: job2
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: step1
+        run: echo "Hello from job3 ${{env.ARN_NAME}}"
+        
 #     with:
 #       ARN_Name: AWS_cert_Name
 #     runs-on: [ubuntu-latest]
