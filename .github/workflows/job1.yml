@@ -16,7 +16,7 @@ jobs:
     needs: job2
     uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
     with:
-      ARN-Name: AWS_cert_Name
+      ARN_Name: AWS_cert_Name
 #     runs-on: [ubuntu-latest]
 #     steps:
 #       - name: Step1
