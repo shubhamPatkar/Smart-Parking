@@ -23,8 +23,8 @@ jobs:
     needs: job2
     if: ${{ github.event.inputs.environment == 'cert'}}
     uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
-    with:
-      ARN_Name: AWS_cert_Name
+#     with:
+#       ARN_Name: AWS_cert_Name
 #     runs-on: [ubuntu-latest]
 #     steps:
 #       - name: Step1
