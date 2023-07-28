@@ -11,4 +11,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step1
-        run: echo "hello from 2nd job" 
+        run: echo  ${{github.event.ARN_NAME}}
