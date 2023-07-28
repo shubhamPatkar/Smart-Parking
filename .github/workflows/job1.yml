@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        type: choise
+        type: choice
         description: select the environment
         required: true
         default: qual
