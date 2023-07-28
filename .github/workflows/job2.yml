@@ -2,9 +2,7 @@ name: job 2
 
 on:
   workflow_call:
-    secrets:
-      SOME_SECRET:
-        required: false
+    
 
 jobs:
   job2:
