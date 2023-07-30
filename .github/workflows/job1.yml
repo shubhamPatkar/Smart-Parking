@@ -17,13 +17,14 @@ env:
 jobs:
   job1:
     runs-on: [ubuntu-latest]
+    env:
+            AWS_CERT_ENV: AWS_CERT_ENV_1
     steps:
       - name: step1
         run: |
           echo "Hello from job1 ${{env.ARN_NAME}}"
           echo "other env is ${{env.other_env}}"
-          env:
-            AWS_CERT_ENV: AWS_CERT_ENV_1
+          
        
   job2:
     needs: job1
