@@ -12,7 +12,7 @@ on:
          - qual
          - cert
 env:
-    ARN_NAME: ${{ if contains(github.event.inputs.environment, 'push') }}value1${{ else }}value2${{ endif }}
+    ARN_NAME: ${{ if {contains(github.event.inputs.environment, 'push')} }}value1${{ else }}value2${{ endif }}
     other_env: cert
 jobs:
   job1:
