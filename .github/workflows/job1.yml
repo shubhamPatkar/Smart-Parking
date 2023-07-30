@@ -12,7 +12,7 @@ on:
          - qual
          - cert
 env:
-    ARN_NAME: 'AWS_CERT_ENV'
+    ARN_NAME: ${{ if eq(github.event.inputs.environment, 'cert') }}value1${{ else }}value2${{ endif }}
     other_env: cert
 jobs:
   job1:
