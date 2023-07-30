@@ -12,7 +12,7 @@ on:
          - qual
          - cert
 env:
-    ARN_NAME: ${{ if {contains(github.event.inputs.environment, 'push')} }}value1${{ else }}value2${{ endif }}
+    ARN_NAME: AWS_CERT_ENV
     other_env: cert
 jobs:
   job1:
@@ -22,6 +22,8 @@ jobs:
         run: |
           echo "Hello from job1 ${{env.ARN_NAME}}"
           echo "other env is ${{env.other_env}}"
+          env:
+            AWS_CERT_ENV: AWS_CERT_ENV_1
        
   job2:
     needs: job1
