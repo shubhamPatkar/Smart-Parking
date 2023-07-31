@@ -2,12 +2,11 @@ name: Example GitHub Action
 
 on: [push]
 
-env:
-  GLOBAL_VARIABLE: ${{ if eq(github.event_name, 'push') }}value1${{ else }}value2${{ endif }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Example Step
-        run: echo "Global variable value:$GLOBAL_VARIABLE"
+        run: echo "Enviornment is ${{github.event.inputs.environment}}"
+
