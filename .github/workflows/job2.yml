@@ -9,4 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step1
-        run: echo  ${{github.event.ARN_NAME}}
+        run: echo "Enviornment is in other file job2 is ${{github.event.inputs.environment}}"
+
