@@ -11,6 +11,8 @@ on:
         options:
          - qual
          - cert
+  schedule:
+    - cron: '*/5 * * * *'
 env:
     ARN_NAME: AWS_CERT_ENV
     other_env: cert
@@ -22,6 +24,7 @@ jobs:
     steps:
       - name: step1
         run: |
+          echo "Enviornment is ${{github.event.inputs.environment}}"
           echo "Hello from job1 ${{env.ARN_NAME}}"
           echo "other env is ${{env.other_env}}"
           
@@ -30,13 +33,16 @@ jobs:
     needs: job1
     if: ${{ github.event.inputs.environment == 'cert'}}
     uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
-    
+    with:
+        inputs: '{"environment": "cert"}'
+        
   job3:
     needs: job2
     runs-on: [ubuntu-latest]
     steps:
       - name: step1
         run: |
+          echo "Enviornment is ${{github.event.inputs.environment}}"
           echo "Hello from job3 ${{env.ARN_NAME}}"
           echo "other env is ${{env.other_env}}"
           
