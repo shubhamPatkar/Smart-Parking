@@ -9,5 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step1
-        run: echo "Enviornment is in other file job2 is ${{github.event.inputs.environment}}"
+        run: echo "Enviornment is in other file job2 is ${{github.event.inputs.environment}} ${{github.event_name}}"
+        
 
