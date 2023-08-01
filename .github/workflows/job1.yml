@@ -45,9 +45,9 @@ jobs:
     if: ${{ github.event.inputs.environment == 'cert'}}
     uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
     with:
-          token: 'CERT'
-          event-type: my-event
-          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "test": "test message"}'
+          ARN_NAME: 'CERT'
+#           event-type: my-event
+#           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "test": "test message"}'
         
   job3:
     needs: job2
