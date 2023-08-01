@@ -32,13 +32,12 @@ jobs:
         run: |
           if ${var} == true;
           then
-            echo "Running in If"
-          elif ${var1} == true;
-          then
-           echo ""Running in else if"
-           else
-           echo "running in else"
-           fi
+          
+          echo "Running in If"
+          else
+          echo "running in else"
+         
+          fi
           echo "Enviornment is ${{github.event_name}}"
           echo "Enviornment is ${{github.event.inputs.environment}}"
           echo "Hello from job1 ${{env.ARN_NAME}}"
