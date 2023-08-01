@@ -27,7 +27,18 @@ jobs:
     runs-on: [ubuntu-latest]
     steps:
       - name: step1
+        env:
+            var: true
         run: |
+          if ${var} == true;
+          then
+            echo "Running in If"
+          elif ${var1} == true;
+          then
+           echo ""Running in else if"
+           else
+           echo "running in else"
+           fi
           echo "Enviornment is ${{github.event_name}}"
           echo "Enviornment is ${{github.event.inputs.environment}}"
           echo "Hello from job1 ${{env.ARN_NAME}}"
@@ -44,8 +55,8 @@ jobs:
     needs: job1
     if: ${{ github.event.inputs.environment == 'cert'}}
     uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
-    secrets:
-      envPAT: 'CERT'
+#     secrets:
+#       envPAT: 'CERT'
 #     with:
 #           ARN_NAME: 'CERT'
 #           event-type: my-event
