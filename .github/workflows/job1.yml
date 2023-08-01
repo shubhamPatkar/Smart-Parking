@@ -28,6 +28,7 @@ jobs:
     steps:
       - name: step1
         run: |
+          echo "Enviornment is ${{github.event_name}}"
           echo "Enviornment is ${{github.event.inputs.environment}}"
           echo "Hello from job1 ${{env.ARN_NAME}}"
           echo "Hello from job1 ${{env.POOL_ENV}}"
