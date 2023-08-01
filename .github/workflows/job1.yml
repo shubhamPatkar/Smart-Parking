@@ -45,8 +45,8 @@ jobs:
     needs: job1
     if: ${{ github.event.inputs.environment == 'cert'}}
     uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
-#     with:
-#         inputs: '{"environment": "cert"}'
+    with:
+        inputs: '{"environment": "CERT"}'
         
   job3:
     needs: job2
