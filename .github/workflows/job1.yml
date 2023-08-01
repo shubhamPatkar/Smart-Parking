@@ -16,8 +16,9 @@ on:
 env:
     ARN_NAME: AWS_${{github.event.inputs.environment}}_ENV
     POOL_ENV: github.event.inputs.environment
-    other_env: '${{secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}]}}'
-    cust_pool: 'abc_${{secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}]}}-java_devTools'
+   # other_env: '${{secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}]}}'
+    other_env: ${{secrets[OTHER_ENV_FOR_QUAL]}}
+  #  cust_pool: 'abc_${{secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}]}}-java_devTools'
     suite_id: '${{secrets[${{github.event.inputs.environment}}]}}'
 jobs:
   job1:
@@ -31,8 +32,9 @@ jobs:
           echo "Hello from job1 ${{env.ARN_NAME}}"
           echo "Hello from job1 ${{env.POOL_ENV}}"
           echo "other env is ${{env.other_env}}"
-          echo "cutst_pool is ${{env.cust_pool}}"
-          echo "suite_id is ${{env.suite_id}}"
+           echo "suite_id is ${{env.suite_id}}"
+          
+   #       echo "cutst_pool is ${{env.cust_pool}}"
        
   job2:
     needs: job1
