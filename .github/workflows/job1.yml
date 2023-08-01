@@ -39,7 +39,8 @@ jobs:
           if ${var2} == true;
           then
           echo "running in else"
-         
+          fi
+          
           fi
           echo "Enviornment is ${{github.event_name}}"
           echo "Enviornment is ${{github.event.inputs.environment}}"
