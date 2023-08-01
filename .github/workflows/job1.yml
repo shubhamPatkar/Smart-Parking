@@ -16,7 +16,7 @@ on:
 env:
     ARN_NAME: AWS_${{github.event.inputs.environment}}_ENV
     POOL_ENV: ${{github.event.inputs.environment}}
-    other_env_key: '${{github.event.inputs.environment}^}' 
+    other_env_key: 'OTHER_ENV_FOR_${{github.event.inputs.environment}}' 
    # other_env: '${{secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}]}}'
     other_env: ${{secrets.OTHER_ENV_FOR_QUAL}}
   #  cust_pool: 'abc_${{secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}]}}-java_devTools'
