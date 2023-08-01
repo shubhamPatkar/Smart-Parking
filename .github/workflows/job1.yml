@@ -33,7 +33,9 @@ jobs:
           echo "Hello from job1 ${{env.POOL_ENV}}"
           echo "other env is ${{env.other_env}}"
           echo "other env is ${{env.other_env_key}}"
-          echo "suite id key is ${{env.suite_id_key}^}"
+          echo "suite id key is ${{env.suite_id_key}}"
+          echo "suiteIdKey=${env.suite_id_key,,}" >>${GITHUB_ENV}
+          echo $suiteIdKey
          # echo "suite_id is ${{env.suite_id}}"
           
    #       echo "cutst_pool is ${{env.cust_pool}}"
