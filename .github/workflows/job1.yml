@@ -28,13 +28,16 @@ jobs:
     steps:
       - name: step1
         env:
-            var: true
+            var: false
+            var2: true
         run: |
           if ${var} == true;
           then
           
           echo "Running in If"
           else
+          if ${var2} == true;
+          then
           echo "running in else"
          
           fi
