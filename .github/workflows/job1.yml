@@ -16,8 +16,8 @@ on:
 env:
     ARN_NAME: AWS_${{github.event.inputs.environment}}_ENV
     POOL_ENV: github.event.inputs.environment
-    other_env: ${{ secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}]  }}
-    cust_pool: 'abc_${{ secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}] }}-java_devTools'
+    other_env: ${{secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}]}}
+    cust_pool: 'abc_${{secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}]}}-java_devTools'
     suite_id: ${{secrets[${{github.event.inputs.environment}}]}}
 jobs:
   job1:
