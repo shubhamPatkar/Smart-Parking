@@ -21,7 +21,7 @@ env:
     other_env: ${{secrets.OTHER_ENV_FOR_QUAL}}
   #  cust_pool: 'abc_${{secrets[OTHER_ENV_FOR_${{github.event.inputs.environment}^}]}}-java_devTools'
     suite_id_key: '${{github.event.inputs.environment}}_SUITE_ID'
-    suite_id: ${{secrets[suite_id_key]}}
+#     suite_id: ${{secrets[suite_id_key]}}
 jobs:
   job1:
     runs-on: [ubuntu-latest]
@@ -34,7 +34,7 @@ jobs:
           echo "other env is ${{env.other_env}}"
           echo "other env is ${{env.other_env_key}}"
           echo "suite id key is ${{env.suite_id_key}}"
-          echo "suite_id is ${{env.suite_id}}"
+         # echo "suite_id is ${{env.suite_id}}"
           
    #       echo "cutst_pool is ${{env.cust_pool}}"
        
