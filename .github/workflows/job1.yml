@@ -28,10 +28,10 @@ jobs:
     steps:
       - name: step1
         env:
-            var: false
+            var:  ${{ contains(github.event.inputs.environment, 'cert') || contains(github.event.inputs.environment, 'qual') }}
             var2: true
         run: |
-          if ${{ var == true || var2 == true }}
+          if ${var} == true;
           then
           echo "Running in If"
           else
