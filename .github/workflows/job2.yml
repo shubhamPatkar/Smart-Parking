@@ -25,3 +25,4 @@ jobs:
       - name: print variables
         run: |
           echo "ARN_NAME value is ${{env.ARN_NAME}}"
+          echo "secret value is ${{secrets[CERT_SUITE_ID]}}"
