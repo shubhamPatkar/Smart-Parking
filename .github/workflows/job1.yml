@@ -31,9 +31,8 @@ jobs:
             var: false
             var2: true
         run: |
-          if ${var} == true;
+          if ${{ var == true || var2 == true }}
           then
-          
           echo "Running in If"
           else
           if ${var2} == true;
