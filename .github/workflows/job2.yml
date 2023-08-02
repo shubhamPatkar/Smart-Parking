@@ -2,6 +2,16 @@ name: job 2
 
 on:
   workflow_call:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: select the environment
+        required: true
+        default: qual
+        options:
+         - qual
+         - cert
     
 
 jobs:
