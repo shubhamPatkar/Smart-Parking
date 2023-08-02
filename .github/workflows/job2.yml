@@ -8,7 +8,18 @@ jobs:
   job2:
     runs-on: ubuntu-latest
     steps:
-      - name: Step1
-        run: echo "Enviornment is in other file job2 is ${{github.event.inputs.environment}} ${{github.event_name}}"
-        
-
+      - name: Swt Env Variable
+        env:
+          envVariable: ${{ contains(github.event.inputs.environment, 'cert') }}
+        run: |
+          if ${envVariable} == true;
+          then
+          echo "Running on certify env"
+          echo "ARN_NAME=AWS_CERT_ENV" >> $GITHUB_ENV
+          
+          else
+          echo "Running on quality env"
+          echo "ARN_NAME=AWS_QUAL_ENV" >> $GITHUB_ENV
+      - name: print variables
+        run: |
+          echo "ARN_NAME value is ${{env.ARN_NAME}}"
