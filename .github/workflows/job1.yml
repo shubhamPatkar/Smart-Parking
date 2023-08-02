@@ -39,6 +39,7 @@ jobs:
           if ${var2} == true;
           then
           echo "running in else"
+          echo "ARN_NAME= AWS_CERT_ELSE_ENV" >> $GITHUB_ENV
           fi
           
           fi
