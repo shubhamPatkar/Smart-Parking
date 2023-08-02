@@ -58,6 +58,9 @@ jobs:
     needs: job1
     if: ${{ github.event.inputs.environment == 'cert'}}
     uses:  shubhamPatkar/Smart-Parking/.github/workflows/job2.yml@main
+    with:
+      config-path: .github/job2.yml
+    secrets: inherit
 #     secrets:
 #       envPAT: 'CERT'
 #     with:
