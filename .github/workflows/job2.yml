@@ -20,6 +20,8 @@ jobs:
           else
           echo "Running on quality env"
           echo "ARN_NAME=AWS_QUAL_ENV" >> $GITHUB_ENV
+
+          fi
       - name: print variables
         run: |
           echo "ARN_NAME value is ${{env.ARN_NAME}}"
